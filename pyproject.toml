@@ -70,6 +70,7 @@ test-core = [
   "pytest",
   "pytest-mpl",
   "pytest-cov",
+  "pytest-xdist",
   "mypy",
   "pre-commit",
   "ruff",
