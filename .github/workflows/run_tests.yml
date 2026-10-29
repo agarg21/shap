@@ -202,6 +202,10 @@ jobs:
           echo "Shap cache data:"
           ls -la "$SHAP_CACHE_DIR" 2>/dev/null || echo "No shap data"
       - name: Test with pytest
+        env:
+          # One OpenMP thread per xdist worker: XGBoost/LightGBM default to all
+          # cores, and 4 workers x 4 threads oversubscribe the runner.
+          OMP_NUM_THREADS: "1"
         # Ensure we avoid adding current working directory to sys.path:
         # - Use "pytest" over "python -m pytest"
         # - Use "append" import mode rather than default "prepend"
